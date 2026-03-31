@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Viernes 2026</title>
+    
+    <!-- Tabler Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .month-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .month-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .month-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: rgba(0,0,0,0.05);
+            position: absolute;
+            top: -20px;
+            right: 10px;
+            line-height: 1;
+        }
+        
+        .month-card.feriado .month-number {
+            color: rgba(168, 0, 0, 0.1);
+        }
+        
+        .month-content {
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        
+        .month-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .month-card.feriado .month-name {
+            border-bottom-color: #a80000;
+            color: #a80000;
+        }
+        
+        /* ========================================
+           ESTILO PARA ÍCONOS ZODIACALES (TABLER ICONS)
+           ======================================== */
+        .zodiac-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .zodiac-icon i {
+            font-size: 20px;
+            color: #ffffff;
+            font-weight: 700;
+            stroke-width: 3;
+        }
+        
+        .month-card.feriado .zodiac-icon {
+            background: linear-gradient(135deg, #a80000, #ff4444);
+            box-shadow: 0 2px 10px rgba(168, 0, 0, 0.5);
+        }
+        
+        .month-footer-text .zodiac-icon {
+            width: 28px;
+            height: 28px;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        .month-footer-text .zodiac-icon i {
+            font-size: 16px;
+            color: #FFD700;
+        }
+        
+        .month-card.feriado .month-footer-text .zodiac-icon i {
+            color: #a80000;
+        }
+        
+        .fridays-list {
+            list-style: none;
+        }
+        
+        .friday-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ========================================
+           ESTILO PARA TENIDAS MAGNAS
+           ======================================== */
+        .friday-item.tenida-magna {
+            background: linear-gradient(90deg, #FFF8DC, #FFE4B5, #FFF8DC);
+            border-left: 4px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            position: relative;
+            overflow: visible;
+        }
+
+        .friday-item.tenida-magna:hover {
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            transform: translateX(5px) scale(1.02);
+        }
+
+        .friday-item.tenida-magna .friday-day-number {
+            color: #FFA500;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .friday-item.tenida-magna:hover .friday-day-number {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .friday-item.tenida-magna .friday-title {
+            color: #B8860B;
+            font-weight: 700;
+        }
+
+        .friday-item.tenida-magna:hover .friday-title {
+            color: #ffffff;
+        }
+
+        /* Badge/Tarjeta de Tenida Magna */
+        .friday-item.tenida-magna::before {
+            content: "🌟 TENIDA MAGNA";
+            position: absolute;
+            top: -8px;
+            right: 10px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+            z-index: 10;
+        }
+
+        .friday-item.tenida-magna .friday-observation {
+            color: #8B6914;
+        }
+
+        .friday-item.tenida-magna:hover .friday-observation {
+            color: #ffffff;
+        }
+        
+        .friday-item:hover {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .friday-item.feriado {
+            background: linear-gradient(90deg, #ffcccc, #ffe6e6);
+            border-left-color: #a80000;
+        }
+        
+        .friday-item.feriado:hover {
+            background: linear-gradient(90deg, #a80000, #ff4444);
+        }
+        
+        .friday-day-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            min-width: 60px;
+            text-align: center;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .friday-item:hover .friday-day-number {
+            color: #ffffff;
+        }
+        
+        .friday-item.feriado .friday-day-number {
+            color: #a80000;
+        }
+        
+        .friday-item.feriado:hover .friday-day-number {
+            color: #ffffff;
+        }
+        
+        .friday-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .friday-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .friday-item:hover .friday-title {
+            color: #ffffff;
+        }
+        
+        .friday-item.feriado .friday-title {
+            color: #a80000;
+        }
+        
+        .friday-item.feriado:hover .friday-title {
+            color: #ffffff;
+        }
+        
+        .friday-observation {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 3px;
+            display: block;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-style: italic;
+        }
+        
+        .friday-item:hover .friday-observation {
+            opacity: 1;
+            max-height: 100px;
+            margin-top: 5px;
+            color: #ffffff;
+        }
+        
+        .month-footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .month-card.feriado .month-footer {
+            background: linear-gradient(135deg, #a80000 0%, #ff4444 100%);
+        }
+        
+        .month-footer-text {
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .month-observation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .month-card.feriado .month-observation {
+            background: linear-gradient(135deg, #a80000 0%, #ff4444 100%);
+        }
+        
+        .month-card:hover .month-footer-text {
+            opacity: 0;
+        }
+        
+        .month-card:hover .month-observation {
+            opacity: 1;
+        }
+        
+        .no-observation {
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .month-number {
+                font-size: 5rem;
+            }
+            
+            .months-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .friday-day-number {
+                font-size: 2rem;
+                min-width: 45px;
+            }
+            
+            .zodiac-icon {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .zodiac-icon i {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📅 Viernes del Año 2026</h1>
+        
+        <div class="months-grid">
+            <!-- ENERO: ♑ Capricornio → ♒ Acuario -->
+            <div class="month-card">
+                <div class="month-number">01</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-capricorn"></i>
+                        </span>
+                        Enero
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">9</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia Grado 1</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">16</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">23</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia Grado 1</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">30</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-aquarius"></i>
+                        </span>
+                        ENERO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FEBRERO: ♒ Acuario → ♓ Piscis -->
+            <div class="month-card">
+                <div class="month-number">02</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-aquarius"></i>
+                        </span>
+                        Febrero
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">6</span>
+                            <div class="friday-content">
+                                <span class="friday-title">La Fuga de Atalanta</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">13</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Alquimia Aplicada al Ritual Masónico</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">20</span>
+                            <div class="friday-content">
+                                <span class="friday-title">PROPONER</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">27</span>
+                            <div class="friday-content">
+                                <span class="friday-title">La Masonería y la Pintura</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-pisces"></i>
+                        </span>
+                        FEBRERO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MARZO: ♓ Piscis → ♈ Aries -->
+            <div class="month-card">
+                <div class="month-number">03</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-pisces"></i>
+                        </span>
+                        Marzo
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">6</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia Grado 1</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">13</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item tenida-magna">
+                            <span class="friday-day-number">20</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Magna Tenida</span>
+                                <span class="friday-observation">Equinoccio de Otoño</span>
+                            </div>
+                        </li>
+                        <li class="friday-item tenida-magna">
+                            <span class="friday-day-number">27</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Magna Tenida</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-aries"></i>
+                        </span>
+                        MARZO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ABRIL: ♈ Aries → ♉ Tauro -->
+            <div class="month-card feriado">
+                <div class="month-number">04</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-aries"></i>
+                        </span>
+                        Abril
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item feriado">
+                            <span class="friday-day-number">3</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Viernes Santo</span>
+                                <span class="friday-observation">🕊️ Feriado Nacional - Semana Santa</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">10</span>
+                            <div class="friday-content">
+                                <span class="friday-title">INSTALACION OFICIALIDAD</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">17</span>
+                            <div class="friday-content">
+                                <span class="friday-title">TENIDA BLANCA</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">24</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-taurus"></i>
+                        </span>
+                        ABRIL 2026
+                    </span>
+                    <div class="month-observation">
+                        <span>🕊️ VIERNES SANTO - 3 de Abril</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MAYO: ♉ Tauro → ♊ Géminis -->
+            <div class="month-card">
+                <div class="month-number">05</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-taurus"></i>
+                        </span>
+                        Mayo
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item feriado">
+                            <span class="friday-day-number">1</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Día del Trabajador - Ritual en templo y lectura de trazado</span>
+                                <span class="friday-observation">👷 Feriado Laboral</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">8</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">15</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">22</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">29</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-gemini"></i>
+                        </span>
+                        MAYO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span>👷 DÍA DEL TRABAJADOR - 1 de Mayo</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JUNIO: ♊ Géminis → ♋ Cáncer -->
+            <div class="month-card">
+                <div class="month-number">06</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-gemini"></i>
+                        </span>
+                        Junio
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">5</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">12</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item tenida-magna">
+                            <span class="friday-day-number">19</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Magna Tenida</span>
+                                <span class="friday-observation">Celebración del Solsticio de Invierno.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">26</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-cancer"></i>
+                        </span>
+                        JUNIO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JULIO: ♋ Cáncer → ♌ Leo -->
+            <div class="month-card">
+                <div class="month-number">07</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-cancer"></i>
+                        </span>
+                        Julio
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">3</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">10</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">17</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">24</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">31</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-leo"></i>
+                        </span>
+                        JULIO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AGOSTO: ♌ Leo → ♍ Virgo -->
+            <div class="month-card">
+                <div class="month-number">08</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-leo"></i>
+                        </span>
+                        Agosto
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">7</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">14</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">21</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">28</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-virgo"></i>
+                        </span>
+                        AGOSTO 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SEPTIEMBRE: ♍ Virgo → ♎ Libra -->
+            <div class="month-card">
+                <div class="month-number">09</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-virgo"></i>
+                        </span>
+                        Septiembre
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">4</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">11</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item feriado">
+                            <span class="friday-day-number">18</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Fiestas Patrias</span>
+                                <span class="friday-observation">SIN OBSERVACIÓN</span>
+                            </div>
+                        </li>
+                        <li class="friday-item tenida-magna">
+                            <span class="friday-day-number">25</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Magna Tenida</span>
+                                <span class="friday-observation">Celebración del Equinoccio de Primavera (DESPERTAR DE LA NATURALEZA)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-libra"></i>
+                        </span>
+                        SEPTIEMBRE 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- OCTUBRE: ♎ Libra → ♏ Escorpio -->
+            <div class="month-card">
+                <div class="month-number">10</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-libra"></i>
+                        </span>
+                        Octubre
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">2</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">9</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">16</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">23</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">30</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-scorpio"></i>
+                        </span>
+                        OCTUBRE 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NOVIEMBRE: ♏ Escorpio → ♐ Sagitario -->
+            <div class="month-card">
+                <div class="month-number">11</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-scorpio"></i>
+                        </span>
+                        Noviembre
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item tenida-magna">
+                            <span class="friday-day-number">6</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Magna Tenida</span>
+                                <span class="friday-observation">Ritual Tenida Fúnebre.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">13</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">20</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">27</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-sagittarius"></i>
+                        </span>
+                        NOVIEMBRE 2026
+                    </span>
+                    <div class="month-observation">
+                        <span class="no-observation">SIN OBSERVACIÓN</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DICIEMBRE: ♐ Sagitario → ♑ Capricornio -->
+            <div class="month-card">
+                <div class="month-number">12</div>
+                <div class="month-content">
+                    <h2 class="month-name">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-sagittarius"></i>
+                        </span>
+                        Diciembre
+                    </h2>
+                    <ul class="fridays-list">
+                        <li class="friday-item">
+                            <span class="friday-day-number">4</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Liturgia</span>
+                                <span class="friday-observation">Ritual en templo y lectura de trazado.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item">
+                            <span class="friday-day-number">11</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Cámara G1 / Cámara G2</span>
+                                <span class="friday-observation">G1: Instrucción del grado, trabajos y lectura de trazados; G2: Instrucción del grado, trabajos y lectura de trazados.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item tenida-magna">
+                            <span class="friday-day-number">18</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Magna Tenida</span>
+                                <span class="friday-observation">Celebración del Solsticio de Verano.</span>
+                            </div>
+                        </li>
+                        <li class="friday-item feriado">
+                            <span class="friday-day-number">25</span>
+                            <div class="friday-content">
+                                <span class="friday-title">Navidad</span>
+                                <span class="friday-observation">🎄 Feriado Nacional - Navidad</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="month-footer">
+                    <span class="month-footer-text">
+                        <span class="zodiac-icon">
+                            <i class="ti ti-zodiac-capricorn"></i>
+                        </span>
+                        DICIEMBRE 2026
+                    </span>
+                    <div class="month-observation">
+                        <span>🎄 NAVIDAD - 25 de Diciembre</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
